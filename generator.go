@@ -509,7 +509,7 @@ func (g *Generator) fillModelPkgPath(filePath string) {
 
 // output format and output
 func (g *Generator) output(fileName string, content []byte) error {
-	result, err := imports.Process(fileName, content, nil)
+	result, err := imports.Process(fileName, content, &imports.Options{FormatOnly: true})
 	if err != nil {
 		//line := strings.Split(string(content), "\n")
 		// errLine, err1 := strconv.Atoi(strings.Split(err.Error(), ":")[1])
