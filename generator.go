@@ -355,7 +355,7 @@ func (g *Generator) generateSingleQueryFile(data *genInfo) (err error) {
 		structPkgPath = g.modelPkgPath
 	}
 
-	_ = fmt.Sprintf("start render header...")
+	g.successInfo(fmt.Sprintf("start render header..."))
 
 	err = render(tmpl.Header, &buf, map[string]interface{}{
 		"Package":        g.queryPkgName,
@@ -366,21 +366,21 @@ func (g *Generator) generateSingleQueryFile(data *genInfo) (err error) {
 		return err
 	}
 
-	_ = fmt.Sprintf("success render header...")
+	g.successInfo(fmt.Sprintf("success render header..."))
 
 	structTmpl := tmpl.BaseStructWithContext
 	if g.judgeMode(WithoutContext) {
 		structTmpl = tmpl.BaseStruct
 	}
 
-	_ = fmt.Sprintf("start render struct...")
+	g.successInfo(fmt.Sprintf("start render struct..."))
 
 	err = render(structTmpl, &buf, data.BaseStruct)
 	if err != nil {
 		return err
 	}
 
-	_ = fmt.Sprintf("success render struct...")
+	g.successInfo(fmt.Sprintf("success render struct..."))
 
 	for _, method := range data.Interfaces {
 		err = render(tmpl.DIYMethod, &buf, method)
@@ -389,14 +389,14 @@ func (g *Generator) generateSingleQueryFile(data *genInfo) (err error) {
 		}
 	}
 
-	_ = fmt.Sprintf("start render method...")
+	g.successInfo(fmt.Sprintf("start render method..."))
 
 	err = render(tmpl.CRUDMethod, &buf, data.BaseStruct)
 	if err != nil {
 		return err
 	}
 
-	_ = fmt.Sprintf("success render method...")
+	g.successInfo(fmt.Sprintf("success render method..."))
 
 	defer g.successInfo(fmt.Sprintf("generate query file: %s/%s.gen.go", g.OutPath, data.FileName))
 	return g.output(fmt.Sprintf("%s/%s.gen.go", g.OutPath, data.FileName), buf.Bytes())
