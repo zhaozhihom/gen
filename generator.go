@@ -10,7 +10,6 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"strconv"
 	"strings"
 	"text/template"
 
@@ -255,6 +254,13 @@ func (g *Generator) Execute() {
 func (g *Generator) successInfo(logInfos ...string) {
 	for _, l := range logInfos {
 		g.db.Logger.Info(context.Background(), l)
+		log.Println(l)
+	}
+}
+
+func (g *Generator) errInfo(logInfos ...string) {
+	for _, l := range logInfos {
+		g.db.Logger.Error(context.Background(), l)
 		log.Println(l)
 	}
 }
@@ -505,14 +511,17 @@ func (g *Generator) fillModelPkgPath(filePath string) {
 func (g *Generator) output(fileName string, content []byte) error {
 	result, err := imports.Process(fileName, content, nil)
 	if err != nil {
-		line := strings.Split(string(content), "\n")
-		errLine, _ := strconv.Atoi(strings.Split(err.Error(), ":")[1])
-		startLine, endLine := errLine-5, errLine+5
-		fmt.Println("Format fail:", errLine, err)
+		//line := strings.Split(string(content), "\n")
+		// errLine, err1 := strconv.Atoi(strings.Split(err.Error(), ":")[1])
 
-		for i := startLine; i <= endLine; i++ {
-			fmt.Println(i, line[i])
-		}
+		g.errInfo(fmt.Sprintf("format file: %v err: %v", fileName, err))
+
+		//startLine, endLine := errLine-5, errLine+5
+		// fmt.Println("Format fail:", errLine, err)
+
+		//for i := startLine; i <= endLine; i++ {
+		//	fmt.Println(i, line[i])
+		//}
 		return fmt.Errorf("cannot format file: %w", err)
 	}
 	return ioutil.WriteFile(fileName, result, 0640)
