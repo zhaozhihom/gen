@@ -356,10 +356,11 @@ func (g *Generator) generateQueryFile() (err error) {
 func (g *Generator) generateSingleQueryFile(data *genInfo) (err error) {
 	var buf bytes.Buffer
 
-	structPkgPath := data.StructInfo.PkgPath
-	if structPkgPath == "" {
-		structPkgPath = g.modelPkgPath
-	}
+	//structPkgPath := data.StructInfo.PkgPath
+	//if structPkgPath == "" {
+	//	structPkgPath = g.modelPkgPath
+	//}
+	structPkgPath := g.ModulePath + "/" + g.ModelPkgPath
 
 	g.successInfo(fmt.Sprintf("start render header..."))
 

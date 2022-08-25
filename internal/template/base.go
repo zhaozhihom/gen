@@ -18,9 +18,9 @@ import(
 	"gorm.io/gorm/schema"
 	"gorm.io/gorm/clause"
 
-	"github.com/zhaozhihom/gen"
-	"github.com/zhaozhihom/gen/field"
-	"github.com/zhaozhihom/gen/helper"
+	"gorm.io/gen"
+	"gorm.io/gen/field"
+	"gorm.io/gen/helper"
 
 	{{if .StructPkgPath}}"{{.StructPkgPath}}"{{end}}
 	{{range .ImportPkgPaths}}{{.}}` + "\n" + `{{end}}
