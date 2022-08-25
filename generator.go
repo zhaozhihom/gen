@@ -360,7 +360,7 @@ func (g *Generator) generateSingleQueryFile(data *genInfo) (err error) {
 	//if structPkgPath == "" {
 	//	structPkgPath = g.modelPkgPath
 	//}
-	structPkgPath := g.ModulePath + "/" + g.ModelPkgPath
+	structPkgPath := g.ModulePath + "/dal/" + g.ModelPkgPath
 
 	g.successInfo(fmt.Sprintf("start render header..."))
 
