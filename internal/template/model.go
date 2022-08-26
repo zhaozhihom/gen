@@ -4,15 +4,6 @@ package template
 const Model = NotEditMark + `
 package {{.StructInfo.Package}}
 
-import (
-	"encoding/json"
-	"time"
-
-	"gorm.io/datatypes"
-	"gorm.io/gorm"
-	{{range .ImportPkgPaths}}{{.}} ` + "\n" + `{{end}}
-)
-
 {{if .TableName -}}const TableName{{.StructName}} = "{{.TableName}}"{{- end}}
 
 // {{.StructName}} {{.StructComment}}

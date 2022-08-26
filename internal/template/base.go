@@ -11,8 +11,6 @@ package {{.Package}}
 
 import(
 	"context"
-	"database/sql"
-	"strings"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
@@ -21,6 +19,8 @@ import(
 	"gorm.io/gen"
 	"gorm.io/gen/field"
 	"gorm.io/gen/helper"
+
+	"gorm.io/plugin/dbresolver"
 
 	{{if .StructPkgPath}}"{{.StructPkgPath}}"{{end}}
 	{{range .ImportPkgPaths}}{{.}}` + "\n" + `{{end}}
