@@ -33,11 +33,11 @@ func ({{.S}} {{.NewStructName}}Do) WithContext(ctx context.Context) *{{.NewStruc
 	return {{.S}}.withDO({{.S}}.DO.WithContext(ctx))
 }
 
-func ({{.S}} {{.QueryStructName}}Do) ReadDB() {{.ReturnObject}} {
+func ({{.S}} {{.NewStructName}}Do) ReadDB() {{.ReturnObject}} {
 	return {{.S}}.Clauses(dbresolver.Read)
 }
 
-func ({{.S}} {{.QueryStructName}}Do) WriteDB() {{.ReturnObject}} {
+func ({{.S}} {{.NewStructName}}Do) WriteDB() {{.ReturnObject}} {
 	return {{.S}}.Clauses(dbresolver.Write)
 }
 
@@ -242,11 +242,11 @@ func ({{.S}} {{.NewStructName}}Do) ScanByPage(result interface{}, offset int, li
 	return
 }
 
-func ({{.S}} {{.QueryStructName}}Do) Scan(result interface{}) (err error) {
+func ({{.S}} {{.NewStructName}}Do) Scan(result interface{}) (err error) {
 	return {{.S}}.DO.Scan(result)
 }
 
-func ({{.S}} {{.QueryStructName}}Do) Delete(models ...*{{.StructInfo.Package}}.{{.StructInfo.Type}}) (result gen.ResultInfo, err error) {
+func ({{.S}} {{.NewStructName}}Do) Delete(models ...*{{.StructInfo.Package}}.{{.StructInfo.Type}}) (result gen.ResultInfo, err error) {
 	return {{.S}}.DO.Delete(models)
 }
 
