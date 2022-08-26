@@ -292,7 +292,7 @@ func (g *Generator) generateQueryFile() (err error) {
 
 	// generate query file
 	var buf bytes.Buffer
-	err = render(tmpl.Header, &buf, map[string]interface{}{
+	err = render(tmpl.GenHeader, &buf, map[string]interface{}{
 		"Package":        g.queryPkgName,
 		"StructPkgPath":  "",
 		"ImportPkgPaths": g.importPkgPaths,

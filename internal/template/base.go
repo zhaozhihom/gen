@@ -18,9 +18,22 @@ import(
 
 	"gorm.io/gen"
 	"gorm.io/gen/field"
-	"gorm.io/gen/helper"
 
 	"gorm.io/plugin/dbresolver"
+
+	{{if .StructPkgPath}}"{{.StructPkgPath}}"{{end}}
+	{{range .ImportPkgPaths}}{{.}}` + "\n" + `{{end}}
+)
+`
+
+const GenHeader = NotEditMark + `
+package {{.Package}}
+
+import(
+	"context"
+	"database/sql"
+
+	"gorm.io/gorm"
 
 	{{if .StructPkgPath}}"{{.StructPkgPath}}"{{end}}
 	{{range .ImportPkgPaths}}{{.}}` + "\n" + `{{end}}
